@@ -21,7 +21,11 @@ import { loginAction } from "@/actions/auth-action"
 import { useRouter } from "next/navigation"
 
 
-export default function FormLogin() {
+export default function FormLogin({
+    isVerifield,
+}: {
+    isVerifield: boolean
+}) {
     const [error, setError] = useState<string | null>(null)
     const [isPending, startTransition] = useTransition()
     const router = useRouter()
@@ -51,6 +55,13 @@ export default function FormLogin() {
 
     return (
         <Form {...form}>
+            {
+                isVerifield && (
+                    <p className="text-center text-green-500 mb-5 text-sm">
+                        Email verifield, you can now login
+                    </p>
+                )
+            }
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
                     control={form.control}

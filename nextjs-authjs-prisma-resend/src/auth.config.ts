@@ -7,6 +7,7 @@ import { prisma } from "./prisma"
 // import { saltAndHashPassword } from "@/utils/password"
 import bcrypt from "bcryptjs"
 import {nanoid} from "nanoid"
+import { sendEmailVerification } from "./lib/mail"
  
 // Notice this is only an object, not a full Auth.js instance
 export default {
@@ -72,7 +73,10 @@ export default {
           if (verifyTokenExist?.identifier) {
             await prisma.verificationToken.delete({
               where: {
-                identifier: user.email
+                identifier_token: {
+                  identifier: user.email,
+                  token: verifyTokenExist.token
+                }
               }
             })
           }
@@ -86,6 +90,11 @@ export default {
               expires: new Date(Date.now() + 1000 * 60 * 60 * 24)
             }
           })
+
+          // enviar email de verificación
+          const response = await sendEmailVerification(user.email, token)
+
+          throw new Error("Please check Email send verification")
         }
 
         return user
