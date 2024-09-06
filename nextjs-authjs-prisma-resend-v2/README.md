@@ -2,19 +2,19 @@
 
 ## **Auth.js v5 beta** usando Credentials + OAuth
 
-### Inicio
+## Inicio
 
 <img src="./README/inicio.png"></img>
 
-### Login
+## Login
 
 <img src="./README/login.png"></img>
 
-### Register
+## Register
 
 <img src="./README/register.png"></img>
 
-### User
+## User
 
 <img src="./README/user.png"></img>
 
